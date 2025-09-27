@@ -4,6 +4,7 @@ import { Rating, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import RenderCampsite from '../features/campsites/RenderCampsite';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
+import { postComment } from '../features/comments/commentsSlice';
 
 const CampsiteInfoScreen = ({ route }) => {
     const { campsite } = route.params;
@@ -22,10 +23,10 @@ const CampsiteInfoScreen = ({ route }) => {
             author,
             rating,
             text,
-            campsiteId: campsite.Id
+            campsiteId: campsite.id
         };
-        console.log(newComment);
         setShowModal(!showModal);
+        dispatch(postComment(newComment));
     };
 
     const resetForm = () => {
@@ -81,14 +82,14 @@ const CampsiteInfoScreen = ({ route }) => {
             />
             <Modal
                 animationType='slide'
-                transparents={false}
+                transparent={false}
                 visible={showModal}
                 onRequestClose={() => setShowModal(!showModal)}
             >
                 <View style={styles.modal}>
                     <Rating 
                         showRating
-                        startingValue='5'
+                        startingValue={5}
                         imageSize={40}
                         onFinishRating={(rating) => setRating(rating)}
                         style={{paddingVertical: 10}}
@@ -99,14 +100,14 @@ const CampsiteInfoScreen = ({ route }) => {
                     <Input
                         placeholder='Author'
                         leftIcon={{ type: 'font-awesome', name: 'user-o'}}
-                        leftIconContainerStyle={{ paddingRight: 10 }}
+                        leftIconContainerStyle={{ paddingRight: 10, paddingLeft: 5 }}
                         onChangeText={(author) => setAuthor(author)}
                         value={author}
                     ></Input>
                     <Input
                         placeholder='Comment'
                         leftIcon={{ type: 'font-awesome', name: 'comment-o'}}
-                        leftIconContainerStyle={{ paddingRight: 10 }}
+                        leftIconContainerStyle={{ paddingRight: 10, paddingLeft: 5 }}
                         onChangeText={(text) => setText(text)}
                         value={text}
                     ></Input>
@@ -124,7 +125,7 @@ const CampsiteInfoScreen = ({ route }) => {
                         <Button
                             onPress={() => {
                                 setShowModal(!showModal);
-                                resetForm;
+                                resetForm();
                             }}
                             color='#808080'
                             title='Cancel'
