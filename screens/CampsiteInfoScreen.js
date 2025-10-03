@@ -45,7 +45,7 @@ const CampsiteInfoScreen = ({ route }) => {
                     startingValue={item.rating}
                     imageSize={10}
                     readonly
-                ></Rating>
+                />
                 <Text style={{ fontSize: 12 }}>
                     {`-- ${item.author}, ${item.date}`}
                 </Text>
@@ -94,21 +94,19 @@ const CampsiteInfoScreen = ({ route }) => {
                 <View style={styles.modal}>
                     <Rating 
                         showRating
-                        startingValue={5}
+                        startingValue={rating}
                         imageSize={40}
                         onFinishRating={(rating) => setRating(rating)}
                         style={{paddingVertical: 10}}
                         type='star'
-                    >
-
-                    </Rating>
+                    />
                     <Input
                         placeholder='Author'
                         leftIcon={{ type: 'font-awesome', name: 'user-o'}}
                         leftIconContainerStyle={{ paddingRight: 10, paddingLeft: 5 }}
                         onChangeText={(author) => setAuthor(author)}
                         value={author}
-                    ></Input>
+                    />
                     <Input
                         placeholder='Comment'
                         leftIcon={{ type: 'font-awesome', name: 'comment-o'}}
@@ -124,7 +122,7 @@ const CampsiteInfoScreen = ({ route }) => {
                                 handleSubmit();
                                 resetForm();
                             }}
-                        ></Button>
+                        />
                     </View>
                     <View style={{margin: 10}}>
                         <Button
@@ -134,7 +132,7 @@ const CampsiteInfoScreen = ({ route }) => {
                             }}
                             color='#808080'
                             title='Cancel'
-                        ></Button>
+                        />
                     </View>
                 </View>
             </Modal>
